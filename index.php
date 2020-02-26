@@ -1,15 +1,5 @@
 <?php
 
-/**
- * Illuminate/Routing
- *
- * @source https://github.com/illuminate/routing
- * @contributor Muhammed Gufran
- * @contributor Matt Stauffer
- * @contributor https://github.com/jwalton512
- * @contributor https://github.com/dead23angel
- */
-
 require_once 'vendor/autoload.php';
 
 use Illuminate\Container\Container;

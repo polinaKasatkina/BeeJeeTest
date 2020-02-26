@@ -11,8 +11,6 @@ use App\Helpers\Session;
 use App\Helpers\Validator;
 use App\Helpers\Redirect;
 
-
-
 class AuthController extends Controller
 {
 

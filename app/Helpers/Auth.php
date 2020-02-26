@@ -20,7 +20,7 @@ class Auth {
      */
     public static function checkAuthenticated($redirect = "login") {
         Session::init();
-        if (!Session::exists(Config::get("SESSION_USER"))) {
+        if (!Session::exists('user')) {
             Session::destroy();
             Redirect::to(getenv('APP_URL') . '/' . $redirect);
         }
@@ -35,14 +35,14 @@ class Auth {
      */
     public static function checkUnauthenticated($redirect = "dashboard") {
         Session::init();
-        if (Session::exists(Config::get("SESSION_USER"))) {
+        if (Session::exists('user')) {
             Redirect::to(getenv('APP_URL') . '/' . $redirect);
         }
     }
 
     public static function check() {
         Session::init();
-        if (!Session::exists(Config::get("SESSION_USER"))) {
+        if (!Session::exists('user')) {
             return false;
         }
 
