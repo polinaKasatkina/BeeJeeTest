@@ -22,7 +22,7 @@ class Redirect {
             if ($location === 404) {
                 header('HTTP/1.0 404 Not Found');
             } else {
-                header("Location: " . $location);
+                header("Location: " . getenv('APP_URL') .  $location);
             }
             exit();
         }

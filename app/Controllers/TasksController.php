@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Helpers\Auth;
 use App\Helpers\Redirect;
 use App\Helpers\Validator;
 use App\Models\Task;
@@ -45,6 +46,8 @@ class TasksController extends Controller
 
     public function edit($id)
     {
+        Auth::checkAuthenticated();
+
         $task = Task::where('id', $id)->first();
 
         return View::render('edit', compact('request', 'task'));
@@ -53,6 +56,8 @@ class TasksController extends Controller
     public function update($id, Request $request)
     {
 
+
+        Auth::checkAuthenticated();
 
         $notice = 'Task updated successfully';
         $errors = [];

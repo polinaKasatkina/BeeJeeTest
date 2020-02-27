@@ -18,11 +18,11 @@ class Auth {
      * @param string $redirect
      * @since 1.0.2
      */
-    public static function checkAuthenticated($redirect = "login") {
+    public static function checkAuthenticated($redirect = "/login") {
         Session::init();
         if (!Session::exists('user')) {
             Session::destroy();
-            Redirect::to(getenv('APP_URL') . '/' . $redirect);
+            Redirect::to($redirect);
         }
     }
 
@@ -33,10 +33,10 @@ class Auth {
      * @param string $redirect
      * @since 1.0.2
      */
-    public static function checkUnauthenticated($redirect = "dashboard") {
+    public static function checkUnauthenticated($redirect = "/dashboard") {
         Session::init();
         if (Session::exists('user')) {
-            Redirect::to(getenv('APP_URL') . '/' . $redirect);
+            Redirect::to($redirect);
         }
     }
 
