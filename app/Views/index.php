@@ -15,7 +15,7 @@
             <span>Sort By Email</span>
             <div class="btn-group" role="group" aria-label="Sort By Name">
                 <a type="button" class="btn btn-secondary" href="/sort_by/email/desc">DESC</a>
-                <a type="button" class="btn btn-secondary" href="/sort_by/email/desc">ASC</a>
+                <a type="button" class="btn btn-secondary" href="/sort_by/email/asc">ASC</a>
             </div>
         </div>
 
@@ -23,7 +23,7 @@
             <span>Sort By Content</span>
             <div class="btn-group" role="group" aria-label="Sort By Name">
                 <a type="button" class="btn btn-secondary" href="/sort_by/content/desc">DESC</a>
-                <a type="button" class="btn btn-secondary" href="/sort_by/content/desc">ASC</a>
+                <a type="button" class="btn btn-secondary" href="/sort_by/content/asc">ASC</a>
             </div>
         </div>
 
@@ -65,7 +65,14 @@
     <div class="row">
         <ul id="page-numbers">
             <?php for ($i = 1; $i <= $paginationCount; $i++) { ?>
-                <?php $active = isset($_GET['page']) && $i == $_GET['page'] ? 'active' : '';
+                <?php
+
+                    if (isset($_GET['page'])) {
+                        $active = $i == $_GET['page'] ? 'active' : '';
+                    } else {
+                        $active = $i == 1 ? 'active' : '';
+                    }
+
                     $url = explode("?", $_SERVER['REQUEST_URI']);
                 ?>
                 <li class="<?=$active?>">

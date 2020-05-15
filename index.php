@@ -52,11 +52,6 @@ require_once 'routes.php';
 // Create the redirect instance
 $redirect = new Redirector(new UrlGenerator($router->getRoutes(), $request));
 
-// use redirect
-// return $redirect->home();
-// return $redirect->back();
-// return $redirect->to('/');
-
 // Dispatch the request through the router
 $response = $router->dispatch($request);
 

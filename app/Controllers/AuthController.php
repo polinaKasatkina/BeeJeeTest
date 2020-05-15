@@ -36,32 +36,23 @@ class AuthController extends Controller
         // Check that the user is unauthenticated.
         Auth::checkUnauthenticated();
 
-
         $rules = [
-            "name" => "required",
-            "password" => "required"
+            "name" => "required|exists",
+            "password" => "required|password"
         ];
+
+        $errors = [];
 
         $validate = Validator::validate($request, $rules);
 
         if ($validate['status'] !== 'success') {
+
             return View::render('login', ['errors' => $validate['errors'], 'request' => $request]);
         }
 
-        $user = User::where('name', $request->name)->exists();
+        $user = User::where('name', $request->name)->get();
 
-        if (!$user) {
-            return View::render('login', ['errors' => ['name' => 'User with this username doesnt exists'], 'request' => $request]);
-        }
-
-        $userData = User::where('name', $request->name)->get();
-
-        if (sha1($request->password) !== $userData[0]->password) {
-
-            return View::render('login', ['errors' => ['password' => 'Wrong password'], 'request' => $request]);
-        }
-
-        Session::put('user', $userData[0]->id);
+        Session::put('user', $user[0]->id);
 
         Redirect::to('/dashboard');
 

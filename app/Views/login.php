@@ -6,13 +6,13 @@
                 <div class="form-group">
                     <input type="text" class="form-control" name="name" placeholder="Name" value="<?=isset($request) ? $request->name : ''?>"  />
                     <?php if (isset($errors) &&  isset($errors['name'])) { ?>
-                        <p class="text-danger"><?=$errors['name']?></p>
+                        <p class="text-danger"><?=$errors['name'][0]?></p>
                     <?php } ?>
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" name="password" placeholder="Password" value="<?=isset($request) ? $request->password : ''?>" />
                     <?php if (isset($errors) &&  isset($errors['password'])) { ?>
-                        <p class="text-danger"><?=$errors['password']?></p>
+                        <p class="text-danger"><?=$errors['password'][0]?></p>
                     <?php } ?>
                 </div>
                 <div class="form-group">

@@ -2,12 +2,6 @@
 
 namespace App\Helpers;
 
-/**
- * Auth:
- *
- * @author Andrew Dyer <andrewdyer@outlook.com>
- * @since 1.0.2
- */
 class Auth {
 
     /**

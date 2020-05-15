@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Helpers\Redirect;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use App\Views\View;
@@ -12,14 +13,19 @@ class HomeController extends Controller
     public function index()
     {
 
+        if (isset($_GET['page']) && $_GET['page'] == 1) {
+            Redirect::to('/');
+        }
+
         $limit = 3;
-        $skip = isset($_GET['page']) ? 3 * $_GET['page'] : 0;
+
+        $skip = isset($_GET['page']) ? 3 * ($_GET['page'] - 1) : 0;
 
         $tasks = Task::take(3)->skip($skip)->get();
 
         $tasksCount = Task::all()->count();
 
-        $paginationCount = floor($tasksCount/$limit);
+        $paginationCount = ceil($tasksCount/$limit);
 
         return View::render('index', compact('tasks', 'paginationCount'));
 
@@ -29,13 +35,13 @@ class HomeController extends Controller
     {
 
         $limit = 3;
-        $skip = isset($_GET['page']) ? 3 * $_GET['page'] : 0;
+        $skip = isset($_GET['page']) ? 3 * ($_GET['page'] - 1) : 0;
 
         $tasks = Task::orderBy($field, $param)->take(3)->skip($skip)->get();
 
         $tasksCount = Task::all()->count();
 
-        $paginationCount = floor($tasksCount/$limit);
+        $paginationCount = ceil($tasksCount/$limit);
 
         return View::render('index', compact('tasks', 'paginationCount'));
     }

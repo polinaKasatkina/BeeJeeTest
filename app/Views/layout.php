@@ -27,9 +27,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="/new">Add new task</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/login">Login</a>
-            </li>
             <?php if (\App\Helpers\Auth::check()) { ?>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -40,6 +37,10 @@
                     <a class="dropdown-item" href="/logout">Logout</a>
                 </div>
             </li>
+            <?php } else { ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
             <?php } ?>
         </ul>
     </div>
@@ -67,21 +68,21 @@
                         <label for="name">Name</label>
                         <input type="text" class="form-control" id="name" name="name">
                         <?php if (isset($errors) &&  isset($errors['name'])) { ?>
-                            <p class="text-danger"><?=$errors['name']?></p>
+                            <p class="text-danger"><?=$errors['name'][0]?></p>
                         <?php } ?>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" class="form-control" id="email" name="email">
                         <?php if (isset($errors) && isset($errors['email'])) { ?>
-                            <p class="text-danger"><?=$errors['email']?></p>
+                            <p class="text-danger"><?=$errors['email'][0]?></p>
                         <?php } ?>
                     </div>
                     <div class="form-group">
                         <label for="text">Task Content</label>
                         <input type="text" class="form-control" id="text" name="text">
                         <?php if (isset($errors) &&  isset($errors['text'])) { ?>
-                            <p class="text-danger"><?=$errors['text']?></p>
+                            <p class="text-danger"><?=$errors['text'][0]?></p>
                         <?php } ?>
                     </div>
                     <input type="submit" value="Save" />

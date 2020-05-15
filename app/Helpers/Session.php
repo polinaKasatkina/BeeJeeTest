@@ -2,12 +2,6 @@
 
 namespace App\Helpers;
 
-/**
- * Session:
- *
- * @author Andrew Dyer <andrewdyer@outlook.com>
- * @since 1.0.1
- */
 class Session {
 
     /**

@@ -31,7 +31,7 @@ class TasksController extends Controller
 
         if ($validate['status'] !== 'success') {
 
-            return View::render('new', ['errors' => $validate['errors']]);
+            return View::render('new', ['errors' => $validate['errors'], 'request' => $request]);
         }
 
         Task::create([
@@ -49,8 +49,14 @@ class TasksController extends Controller
         Auth::checkAuthenticated();
 
         $task = Task::where('id', $id)->first();
+        $notice = '';
 
-        return View::render('edit', compact('request', 'task'));
+        if (isset($_COOKIE['notice'])) {
+            $notice = $_COOKIE['notice'];
+            setcookie("notice", "", time()-3600, $_SERVER['REQUEST_URI']);
+        }
+
+        return View::render('edit', compact('task', 'notice'));
     }
 
     public function update($id, Request $request)
@@ -62,6 +68,8 @@ class TasksController extends Controller
         $notice = 'Task updated successfully';
         $errors = [];
 
+        $task = Task::find($id);
+
         $rules = [
             'name' => 'required',
             'email' => 'required|email',
@@ -72,10 +80,9 @@ class TasksController extends Controller
 
         if ($validate['status'] !== 'success') {
 
-            return View::render('edit', compact('request', 'task', 'notice', 'errors'));
+            $errors = $validate['errors'];
+            return View::render('edit', compact('request', 'task', 'errors'));
         }
-
-        $task = Task::find($id);
 
         $task->update([
             'name' =>  $request->name,
@@ -85,7 +92,7 @@ class TasksController extends Controller
             'edited' => $task->content !== $request->text ? 1 : 0
         ]);
 
-        Redirect::to('/dashboard/task/' . $id );
+        Redirect::with(['notice' => $notice], '/dashboard/task/' . $id);
     }
 
 }

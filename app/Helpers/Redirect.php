@@ -2,12 +2,6 @@
 
 namespace App\Helpers;
 
-/**
- * Redirect:
- *
- * @author Andrew Dyer <andrewdyer@outlook.com>
- * @since 1.0.1
- */
 class Redirect {
 
     /**
@@ -26,6 +20,15 @@ class Redirect {
             }
             exit();
         }
+    }
+
+    public static function with(array $params, $location = "") {
+
+        foreach ($params as $key => $value) {
+            setcookie($key, $value);
+        }
+
+        return self::to($location);
     }
 
 }
